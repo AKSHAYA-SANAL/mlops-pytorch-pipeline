@@ -99,7 +99,7 @@ def main():
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             patience_counter = 0
-            save_path = checkpoint_dir /
+            save_path = checkpoint_dir / "best_model.pt"
             config["output"]["model_name"]
             torch.save({
                 "epoch": epoch + 1,
@@ -117,4 +117,4 @@ def main():
     print(json.dumps({"event": "training_complete", "best_val_loss": round(best_val_loss, 4)}), flush=True)
 
 if __name__ == "__main__":
-main()
+    main()

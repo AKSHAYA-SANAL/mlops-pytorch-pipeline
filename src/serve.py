@@ -1,4 +1,3 @@
-
 import io
 import torch
 import torch.nn.functional as F
@@ -50,8 +49,7 @@ def startup_event():
 def health_check():
     if model is not None:
         return {"status": "healthy", "model_loaded": True}
-    raise HTTPException(status_code=503, status_aint="Model not loaded")
-
+    raise HTTPException(status_code=503, detail="Model not loaded")
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     if model is None:

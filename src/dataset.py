@@ -29,13 +29,13 @@ def get_dataloaders(
     train_dataset = datasets.CIFAR10(
         root=data_dir,
         train=True,
-        download=True,
+        download=False,
         transform=get_transforms(train=True),
     )
     val_dataset = datasets.CIFAR10(
         root=data_dir,
         train=False,
-        download=True,
+        download=False,
         transform=get_transforms(train=False),
     )
     train_loader = DataLoader(

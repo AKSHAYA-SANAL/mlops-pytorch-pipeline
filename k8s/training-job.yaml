@@ -1,1 +1,41 @@
-
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ml-training-job
+  namespace: ml-training
+spec:
+  template:
+    spec:
+      containers:
+      - name: trainer
+        image: mlops-train:v1
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: "2"
+            memory: "4Gi"
+            nvidia.com/gpu: "1"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+            nvidia.com/gpu: "1"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/configs
+        - name: storage-volume
+          mountPath: /app/data
+        - name: checkpoint-volume
+          mountPath: /app/checkpoints
+      restartPolicy: OnFailure
+      tolerations:
+      - key: "nvidia.com/gpu"
+        operator: "Exists"
+        effect: "NoSchedule"
+      volumes:
+      - name: config-volume
+        configMap:
+          name: training-config
+      - name: storage-volume
+        emptyDir: {}
+      - name: checkpoint-volume
+        emptyDir: {}
