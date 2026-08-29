@@ -31,7 +31,7 @@ The goal of this assignment was to take a basic image classification model and p
 +-------------------------------------------------------+
 ```
 
-## What's in here?
+## Contents 
 - **`src/`**: All the core python stuff—model definition, dataset processing, training loop, and the FastAPI serving app.
 - **`docker/`**: Separate Dockerfiles for training and serving so everything stays modular and clean.
 - **`k8s/`**: All the kubernetes YAML files (namespace, configmap, training job, deployment, service, and HPA).
